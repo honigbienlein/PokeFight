@@ -3,6 +3,15 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const port = process.env.PORT ?? 8000
+const Results = require('./modals/results')
+
+
+require("dotenv").config();
+const mongoose = require('mongoose');
+mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@pokefight.devlezz.mongodb.net/test`);
+
+
+
 
 app.use(cors())
 
@@ -20,6 +29,27 @@ app.get('/pokemon/:id', (req, res) => {
     res.send(result)
   })
 
+  app.post("/game/save", (req, res) => 
+    Results
+      .create({ winnerID: req.body.id, winnerName: `${req.body.name.english}` })
+      .then(function () {
+        res.send('winner saved to database!')
+      })
+
+
+
+
+
+    // console.log(req)
+    // const resultToDB = new Results(req.body);
+    // resultToDB.save()
+    //   .then(item => {
+    //     res.send("winner saved to database");
+    //   })
+    //   .catch(err => {
+    //     res.status(400).send("unable to save to database");
+    //   });
+  );
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
