@@ -28,7 +28,7 @@ app.get('/pokemon/:id', (req, res) => {
 
   app.post("/game/save", (req, res) => 
     Results
-      .create({ winnerID: req.body.winnerID, winnerName: req.body.winnerName })
+      .create({ "winnerID": req.body.winnerID, "winnerName": req.body.winnerName })
       .then(function () {
         res.send('winner saved to database!')
       })
