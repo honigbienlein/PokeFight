@@ -31,12 +31,12 @@ app.get('/pokemon/:id', (req, res) => {
     Results
       .create({ winnerID: req.body.winnerID, winnerName: req.body.winnerName })
       .then(function () {
-        res.send('winner saved to database!')
+        res.json('winner saved to database!')
       })
       .catch(err => {
         console.error(err)
         res.status(500)
-        res.send(err.message)
+        res.json(err.message)
       }) 
       //console.table(req.body)
 
