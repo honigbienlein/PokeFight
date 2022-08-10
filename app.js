@@ -30,7 +30,9 @@ app.get('/pokemon/:id', (req, res) => {
     res.send(result)
   })
 
-  app.post("/game/save", (req, res) => 
+  let encodeJson = express.encodeJson({ extended: false })
+
+  app.post("/game/save", encodeJson, (req, res) => 
     Results
       .create({ "winnerID": req.body.winnerID, "winnerName": req.body.winnerName })
       .then(function () {
