@@ -8,7 +8,7 @@ const Results = require('./modals/results')
 
 const mongoose = require('mongoose');
 //mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@pokefight.devlezz.mongodb.net/test`);
-mongoose.connect(process.env.URL)
+mongoose.connect(process.env.URL2)
 
 app.use(cors())
 app.use(express.json())
@@ -29,7 +29,7 @@ app.get('/pokemon/:id', (req, res) => {
 
   app.post("/game/save", (req, res) => 
     Results
-      .create({ "winnerID": req.body.winnerID, "winnerName": req.body.winnerName })
+      .create({ winnerID: req.body.winnerID, winnerName: req.body.winnerName })
       .then(function () {
         res.send('winner saved to database!')
       })
