@@ -10,9 +10,6 @@ require("dotenv").config();
 const mongoose = require('mongoose');
 mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@pokefight.devlezz.mongodb.net/test`);
 
-
-
-
 app.use(cors())
 
 app.get('/', (req, res) => {
@@ -31,14 +28,10 @@ app.get('/pokemon/:id', (req, res) => {
 
   app.post("/game/save", (req, res) => 
     Results
-      .create({ winnerID: req.body.id, winnerName: `${req.body.name.english}` })
+      .create({ winnerID: req.body.winnerID, winnerName: req.body.winnerName })
       .then(function () {
         res.send('winner saved to database!')
       })
-
-
-
-
 
     // console.log(req)
     // const resultToDB = new Results(req.body);
