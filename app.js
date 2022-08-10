@@ -29,7 +29,7 @@ app.get('/pokemon/:id', (req, res) => {
 
   app.post("/game/save", (req, res) => 
     Results
-      .create({ winnerID: req.body.winnerID, winnerName: req.body.winnerName, enemyID: req.body.winnerID, enemyName: req.body.enemyName, date: req.body.date })
+      .create({ winnerID: req.body.winnerID, winnerName: req.body.winnerName, enemyID: req.body.enemyID, enemyName: req.body.enemyName, date: req.body.date })
       .then(function () {
         res.json('game result saved to database!')
       })
@@ -50,6 +50,11 @@ app.get('/pokemon/:id', (req, res) => {
     //     res.status(400).send("unable to save to database");
     //   });
   );
+
+  app.get('/game/leaderboard', (req, res) => {
+    Results
+      .find({}, (err, data) => res.json(data))
+  })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
