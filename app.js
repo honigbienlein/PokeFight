@@ -31,12 +31,17 @@ app.get('/pokemon/:id', (req, res) => {
   })
 
   app.post("/game/save", (req, res) => 
-/*     Results
+    Results
       .create({ "winnerID": req.body.winnerID, "winnerName": req.body.winnerName })
       .then(function () {
         res.send('winner saved to database!')
-      }) */
-      console.table(req.body)
+      })
+      .catch(err => {
+        console.error(err)
+        res.status(500)
+        res.send(err.message)
+      }) 
+      //console.table(req.body)
 
     // console.log(req)
     // const resultToDB = new Results(req.body);
