@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const gameSchema = new Schema({
   winnerID:  Number,
   winnerName: String,
-//   date: { type: Date, default: Date.now },
+  enemyID: Number,
+  enemyName: String,
+  date: { type: Date, default: Date.now },
 });
 
 // const GameResult = mongoose.model('GameResult', gameSchema);
