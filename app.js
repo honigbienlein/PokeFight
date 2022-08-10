@@ -1,3 +1,4 @@
+require("dotenv").config();
 let jsonData = require('./pokedex.json')
 const express = require('express') 
 const app = express()
@@ -5,16 +6,12 @@ const cors = require('cors')
 const port = process.env.PORT ?? 8000
 const Results = require('./modals/results')
 
-
-require("dotenv").config();
 const mongoose = require('mongoose');
 //mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@pokefight.devlezz.mongodb.net/test`);
-mongoose.connect(process.env.URL, {
-  user: process.env.USER,
-  pass: process.env.PASSWORD,
-})
+mongoose.connect(process.env.URL)
 
 app.use(cors())
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -30,9 +27,7 @@ app.get('/pokemon/:id', (req, res) => {
     res.send(result)
   })
 
-  let encodeJson = express.encodeJson({ extended: false })
-
-  app.post("/game/save", encodeJson, (req, res) => 
+  app.post("/game/save", (req, res) => 
     Results
       .create({ "winnerID": req.body.winnerID, "winnerName": req.body.winnerName })
       .then(function () {
